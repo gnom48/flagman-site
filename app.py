@@ -7,13 +7,15 @@ CAT_TITLES = {
     'anti-ice':   'Противогололёдные реагенты',
     'oilgas':     'Промышленная химия для нефтегазовой отрасли',
     'wide-chem':  'Химия широкого спектра',
-    'dispersions':'Дисперсии и материалы для декора',
+    'dispersions': 'Дисперсии и материалы для декора',
     'bulk':       'Сыпучие материалы и декор',
     'marble':     'Мрамор молотый фракционный',
 }
 
+
 def _product_name(p: dict, pid: int) -> str:
     return p.get('title') or p.get('name') or f'Товар {pid}'
+
 
 def _similar_products(pid: int, k: int = 6):
     """Подбор похожих товаров в рамках той же категории.
@@ -25,7 +27,8 @@ def _similar_products(pid: int, k: int = 6):
     cat = cur.get('category')
     cur_tags = set(cur.get('tags') or [])
     # кандидаты той же категории, кроме текущего
-    items = [p for p in PRODUCTS.values() if p.get('category') == cat and p.get('id') != pid]
+    items = [p for p in PRODUCTS.values() if p.get(
+        'category') == cat and p.get('id') != pid]
 
     def score(p):
         tags = set(p.get('tags') or [])
@@ -38,25 +41,31 @@ def _similar_products(pid: int, k: int = 6):
     items.sort(key=score, reverse=True)
     return items[:k]
 
+
 @app.route("/", endpoint="index")
 def home():
     return render_template("index.html")
+
 
 @app.route("/about")
 def about():
     return render_template("about.html")
 
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
 
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
 
+
 @app.route("/catalog", endpoint="catalog")
 def catalog():
     return render_template("catalog.html", breadcrumbs=[('Каталог', None)])
+
 
 @app.route("/product/<int:pid>")
 def product_page(pid: int):
@@ -82,6 +91,7 @@ def product_page(pid: int):
         breadcrumbs=breadcrumbs,
         related=similars
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
