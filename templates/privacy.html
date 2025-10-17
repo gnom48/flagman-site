@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Политика конфиденциальности</title>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --card: rgba(255,255,255,.06);
+      --text: #e8eef5;
+      --muted: rgba(232,238,245,.72);
+      --accent: #6fb1ff;
+      --ring: rgba(255,255,255,.16);
+      --shadow: 0 22px 60px rgba(0,0,0,.28);
+      --maxw: 1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    a{color:#fff;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+    a:hover{border-color:rgba(255,255,255,.35)}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(28px,4vw,44px) 24px 64px}
+    .glass{
+      position:relative;border-radius:36px;border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.04));
+      backdrop-filter: blur(22px) saturate(120%); -webkit-backdrop-filter: blur(22px) saturate(120%);
+      box-shadow:var(--shadow); overflow:hidden;
+    }
+    .glass::before{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        radial-gradient(120% 120% at 10% 0%, rgba(111,177,255,.18), transparent 60%),
+        url("../../images/bg-dark.png") center/cover no-repeat;
+      filter: blur(2px);
+    }
+
+    /* Header */
+    .header{display:grid;gap:8px;padding:clamp(28px,5vw,48px) clamp(22px,3vw,32px)}
+    .title{margin:0;font-weight:900;letter-spacing:.2px;line-height:1.05;font-size:clamp(28px,5.6vw,56px)}
+    .subtitle{margin:0;color:var(--muted);font-size:clamp(14px,1.6vw,18px)}
+
+    /* Content */
+    .content{display:grid;grid-template-columns: 1.1fr .9fr; gap: clamp(18px,4vw,44px); padding: 0 clamp(22px,3vw,32px) clamp(28px,4vw,44px)}
+    @media (max-width: 980px){ .content{grid-template-columns:1fr} }
+
+    .doc{
+      display:grid; gap:18px; align-content:start
+    }
+    .block{
+      background: var(--card);
+      border:1px solid var(--ring);
+      border-radius:24px; padding:clamp(16px,2.2vw,22px);
+    }
+    .h2{
+      margin:0 0 8px 0; font-weight:800; font-size: clamp(18px,2.4vw,24px); line-height:1.2;
+    }
+    .muted{color:var(--muted)}
+    ul.clean{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    .dot li{position:relative;padding-left:18px}
+    .dot li::before{content:""; position:absolute; left:6px; top:.82em; width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.42)}
+
+    /* Contacts card (твоя разметка) */
+    .contacts{
+      display:grid; gap:18px; align-content:start
+    }
+    .contacts__card{
+      position:relative;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(14,16,22,.55);
+      backdrop-filter: blur(16px) saturate(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(120%);
+      box-shadow:0 18px 48px rgba(0,0,0,.35);
+      padding:clamp(18px,2.6vw,24px);
+    }
+    .contacts__title{margin:0 0 8px 0;font-size:clamp(22px,3vw,28px);font-weight:800}
+    .contacts__list{list-style:none;margin:0 0 12px 0;padding:0;display:grid;gap:10px}
+    .contacts__item{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:center}
+    .contacts__icon{color:rgba(255,255,255,.9);display:inline-grid;place-items:center}
+    .contacts__btn{
+      display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 18px;border-radius:16px;
+      background:#fff;color:#111;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.25);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .contacts__btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(0,0,0,.3)}
+    .contacts__btn-icon{display:inline-grid;place-items:center}
+
+    /* Footer hint */
+    .footnote{padding: 0 clamp(22px,3vw,32px) clamp(28px,4vw,44px); color:var(--muted); font-size:14px}
+
+    /* Links inside doc */
+    .doc a{color:#cfe3ff;border-color:rgba(207,227,255,.35)}
+  </style>
+</head>
+<body>
+
+  <main class="wrap">
+    <section class="glass">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="title">Политика конфиденциальности</h1>
+        <p class="subtitle">Дата обновления: 15 октября 2025 г.</p>
+      </header>
+
+      <!-- Content -->
+      <div class="content">
+        <!-- LEFT: Document -->
+        <article class="doc">
+          <section class="block">
+            <h2 class="h2">1. Общие положения</h2>
+            <p>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей (далее — «Пользователь») при использовании веб-сайта, приложений и сервисов (далее — «Сервис»). Используя Сервис, вы соглашаетесь с условиями данной Политики.</p>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">2. Состав обрабатываемых данных</h2>
+            <ul class="clean dot">
+              <li><strong>Персональные:</strong> ФИО, телефон, email, данные профиля.</li>
+              <li><strong>Технические:</strong> IP-адрес, тип устройства/браузера, ОС, cookie.</li>
+              <li><strong>Поведенческие:</strong> страницы, клики, время на сайте, реакции на уведомления.</li>
+            </ul>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">3. Цели обработки</h2>
+            <ul class="clean dot">
+              <li>регистрация/авторизация и предоставление функционала Сервиса;</li>
+              <li>коммуникации (уведомления, поддержка, новости);</li>
+              <li>аналитика и улучшение качества продуктов;</li>
+              <li>исполнение требований законодательства РФ.</li>
+            </ul>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">4. Хранение и защита</h2>
+            <ul class="clean dot">
+              <li>серверы в защищённых сегментах, соответствие ФЗ-152;</li>
+              <li>шифрование трафика (HTTPS), шифрование данных (AES-256 где применимо);</li>
+              <li>доступ по роли (RBAC), аудит действий;</li>
+              <li>уведомление о нарушениях безопасности в течение 72 часов.</li>
+            </ul>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">5. Передача третьим лицам</h2>
+            <p>Данные передаются только для выполнения услуг (платёжные/почтовые провайдеры), по требованию закона, а также партнёрам по договорам с обязательствами конфиденциальности и безопасной обработки. Трансграничная передача — только в страны с адекватной защитой ПДн.</p>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">6. Cookie и аналитика</h2>
+            <p>Используем cookie и аналогичные технологии для авторизации, персонализации и статистики (напр., Метрика/GA). Cookie можно отключить в браузере — часть функций может работать ограниченно.</p>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">7. Права пользователя</h2>
+            <ul class="clean dot">
+              <li>получать сведения о своих данных и методах их обработки;</li>
+              <li>требовать уточнения, блокирования или удаления;</li>
+              <li>отзывать согласие на обработку;</li>
+              <li>обращаться с жалобой в Роскомнадзор.</li>
+            </ul>
+            <p class="muted">Для реализации прав свяжитесь с нами по контактам на этой странице.</p>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">8. Срок хранения</h2>
+            <p>Данные хранятся до достижения целей обработки или отзыва согласия, после чего подлежат удалению либо обезличиванию, если иное не требуется по закону.</p>
+          </section>
+
+          <section class="block">
+            <h2 class="h2">9. Обновления политики</h2>
+            <p>Мы можем обновлять Политику. Актуальная версия всегда размещается по адресу <code>/privacy</code>. Существенные изменения сопровождаем уведомлением в интерфейсе.</p>
+          </section>
+        </article>
+
+        <!-- RIGHT: Contacts -->
+        <aside class="contacts">
+          <div class="contacts__card">
+            <h2 class="contacts__title">Контакты</h2>
+
+            <ul class="contacts__list">
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" fill="currentColor"/></svg>
+                </span>
+                <span>РБ Уфимский р-н, с.Дмитриевка, Рабочий пер., д.29</span>
+              </li>
+
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6.6 10.8a15.7 15.7 0 0 0 6.6 6.6l2.2-2.2a1.5 1.5 0 0 1 1.6-.36c1.76.62 3.68.96 5.4 1.09a1.5 1.5 0 0 1 1.4 1.5V21a1.5 1.5 0 0 1-1.5 1.5C10.85 22.5 1.5 13.15 1.5 3A1.5 1.5 0 0 1 3 1.5h3.57a1.5 1.5 0 0 1 1.5 1.4c.13 1.72.47 3.64 1.1 5.4a1.5 1.5 0 0 1-.37 1.6L6.6 10.8z" fill="currentColor"/></svg>
+                </span>
+                <a href="tel:+79625251645">+7 (962) 525-16-45</a>
+              </li>
+
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6.6 10.8a15.7 15.7 0 0 0 6.6 6.6l2.2-2.2a1.5 1.5 0 0 1 1.6-.36c1.76.62 3.68.96 5.4 1.09a1.5 1.5 0 0 1 1.4 1.5V21a1.5 1.5 0 0 1-1.5 1.5C10.85 22.5 1.5 13.15 1.5 3A1.5 1.5 0 0 1 3 1.5h3.57a1.5 1.5 0 0 1 1.5 1.4c.13 1.72.47 3.64 1.1 5.4a1.5 1.5 0 0 1-.37 1.6L6.6 10.8z" fill="currentColor"/></svg>
+                </span>
+                <a href="tel:+79050021332">+7 (905) 002-13-32</a>
+              </li>
+
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z" fill="currentColor"/></svg>
+                </span>
+                <a href="mailto:sflagman@list.ru">sflagman@list.ru</a>
+              </li>
+
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2zm1 11h5v-2h-4V6h-2v7z" fill="currentColor"/></svg>
+                </span>
+                <span>09:00 – 18:00 (пн–пт)</span>
+              </li>
+
+              <li class="contacts__item">
+                <span class="contacts__icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2zm1 11h5v-2h-4V6h-2v7z" fill="currentColor"/></svg>
+                </span>
+                <span>Сб, Вс — выходной</span>
+              </li>
+            </ul>
+
+            <a class="contacts__btn"
+               href="https://yandex.ru/maps/?ll=55.797300,54.805157&z=17&pt=55.797300,54.805157,pm2rdm&text=%D0%A0%D0%91%20%D0%A3%D1%84%D0%B8%D0%BC%D1%81%D0%BA%D0%B8%D0%B9%20%D1%80-%D0%BD%2C%20%D1%81.%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B5%D0%B2%D0%BA%D0%B0%2C%20%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D0%BF%D0%B5%D1%80.%2C%20%D0%B4.29"
+               target="_blank" rel="noopener noreferrer">
+              <span class="contacts__btn-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z" fill="#ff3b30"/><circle cx="12" cy="9" r="2.5" fill="#fff"/></svg>
+              </span>
+              Перейти в Яндекс Карты
+            </a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="footnote">
+        © 2025. Все права защищены. Вопросы по персональным данным — <a href="mailto:sflagman@list.ru">sflagman@list.ru</a>.
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

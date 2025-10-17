@@ -1,0 +1,122 @@
+
+/* секция */
+.contacts{
+  padding: clamp(60px, 8vw, 20px) 0px;
+  overflow-x: hidden;
+  margin: 0 auto;
+  max-width: 1300px;
+  width:90%;
+}
+
+/* карта-контейнер */
+.contacts__map{
+  position: relative;
+  border-radius: 36px;
+  overflow: hidden;
+  margin-inline: 0;
+  min-height: clamp(380px, 48vw, 620px);
+  background: #0f1319;
+}
+
+/* фон карты (img или iframe на выбор) */
+.contacts__map-img,
+.contacts__map-iframe{
+  position: absolute;
+  inset: 0;
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 100%;
+  
+  object-fit: cover;
+  border: 0;
+  filter: saturate(110%) contrast(1.05);
+}
+
+/* стеклянная карточка */
+.contacts__card{
+  position: absolute;
+  top: clamp(18px, 3vw, 32px);
+  left: clamp(18px, 3vw, 32px);
+  width: min(100%, clamp(320px, 45vw, 560px));
+  color: #fff;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(14,16,22,.55);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  box-shadow: 0 18px 48px rgba(0,0,0,.35);
+  padding: clamp(18px, 2.6vw, 28px);
+}
+
+/* заголовок */
+.contacts__title{
+  font-size: clamp(28px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 clamp(12px, 2vw, 18px);
+}
+
+/* список */
+.contacts__list{
+  display: grid;
+  gap: clamp(10px, 1.6vw, 14px);
+  margin: 0 0 clamp(18px, 2.6vw, 26px);
+  padding: 0;
+  list-style: none;
+}
+
+.contacts__item{
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(14px, 1.6vw, 20px);
+  line-height: 1.35;
+  opacity: .95;
+}
+
+.contacts__icon{ color: rgba(255,255,255,.9); display: inline-grid; place-items: center; }
+
+/* ссылки в строках */
+.contacts__item a{
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease, opacity .2s ease;
+}
+.contacts__item a:hover{ border-color: rgba(255,255,255,.35); opacity: .95; }
+
+/* кнопка "Перейти в Яндекс Карты" */
+.contacts__btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 clamp(18px, 3vw, 28px);
+  border-radius: 18px;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .2s ease, box-shadow .2s ease;
+  white-space: nowrap;
+}
+.contacts__btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,0,0,.3); }
+.contacts__btn:active{ transform: translateY(0); box-shadow: 0 10px 22px rgba(0,0,0,.25); }
+.contacts__btn-icon{ display:inline-grid; place-items:center; }
+
+/* адаптив */
+@media (max-width: 900px){
+  .contacts__card{
+    position: static;            /* карточка становится внутри контейнера */
+    margin: clamp(14px, 2.6vw, 22px);
+    width: auto;
+  }
+}
+
+/* без горизонтального скролла везде */
+html, body{ max-width: 100%; overflow-x: hidden; }
+
+

@@ -1,0 +1,123 @@
+:root{
+  --page-gutter: clamp(16px, 4vw, 40px);
+}
+
+.advantages{
+  /* центрируем + задаём поля по краям страницы */
+  width: min(1300px, calc(100% - 2*var(--page-gutter)));
+  margin-inline: auto;                /* ← центр */
+  margin-block: clamp(20px, 5vw, 48px);
+
+  /* остальное без изменений */
+  position: relative;
+  padding: clamp(28px, 5vw, 64px);
+  color: #fff;
+  border-radius: 36px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  box-shadow: 0 22px 60px rgba(0,0,0,.28);
+  max-width: 1300px;
+}
+
+.advantages::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("../../images/bg-dark.png") center/cover no-repeat;
+  filter: blur(3px);
+  z-index:-1;
+}
+
+
+/* если хочешь использовать ровно тот же класс — можно просто
+   навесить catalog__glass и переопределить только padding */
+.catalog__glass.advantages{ padding: clamp(28px, 5vw, 64px); }
+
+
+.advantages__container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 40px); /* ← добавили отступы слева/справа */
+  box-sizing: border-box;
+}
+
+.advantages__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,3vw,32px); }
+
+@media (max-width: 980px){
+  .advantages__grid{ grid-template-columns:1fr; }
+}
+
+
+/* затемнение + легкий градиентный блик */
+.advantages__overlay{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 20% 10%, rgba(255,255,255,.10) 0, rgba(255,255,255,0) 50%) ,
+    linear-gradient(180deg, rgba(0,0,0,.48), rgba(0,0,0,.58));
+  z-index: -1;
+}
+
+/* контейнер контента */
+.advantages__container{
+  max-width: 1200px; margin: 0 auto;
+}
+
+/* заголовки */
+.advantages__title{
+  margin: 0 0 clamp(6px, 1.4vw, 10px);
+  font-weight: 900;
+  font-size: clamp(28px, 6vw, 56px);
+  line-height: 1.06;
+}
+.advantages__subtitle{
+  margin: 0 0 clamp(20px, 4vw, 40px);
+  font-size: clamp(14px, 2.2vw, 22px);
+  color: rgba(255,255,255,.72);
+}
+
+/* карточки */
+.advantages__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 3vw, 32px);
+}
+
+.adv-card{
+  position: relative;
+  border-radius: 28px;
+  padding: clamp(18px, 3.4vw, 28px);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.25);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 20px 40px rgba(0,0,0,.25);
+  display: grid;
+  place-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  text-align: center;
+  min-height: clamp(140px, 24vw, 240px);
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.adv-card:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 26px 56px rgba(0,0,0,.3);
+}
+
+.adv-card__icon img{
+  width: auto;
+  height: clamp(90px, 5vw, 340px);
+  display: block;
+}
+.adv-card__text{
+  font-size: clamp(14px, 1.8vw, 20px);
+}
+
+/* адаптив */
+@media (max-width: 980px){
+  .advantages__grid{ grid-template-columns: 1fr; }
+  .adv-card{ min-height: 120px; }
+}

@@ -1,0 +1,96 @@
+/* Контейнер: фото слева, текст справа, ширина ограничена */
+.about__container{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) 1fr; /* левая колонка под фото */
+  gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+/* Текст справа */
+.about__title{
+  margin: 0 0 clamp(8px, 1.6vw, 12px);
+  font-weight: 900;
+  letter-spacing: .2px;
+  line-height: 1.05;
+  font-size: clamp(28px, 6vw, 56px);    /* крупный заголовок как в макете */
+}
+.about__text{
+  margin: 0;
+  font-size: clamp(14px, 1.6vw, 24px);
+  line-height: 1.75;
+  color: #2e3a46;
+  max-width: 68ch;                      /* приятная длина строки */
+}
+
+/* Фото — нормальный размер, высота считается от ширины */
+.about__media{
+  width: 100%;
+  max-width: 520px;           /* не уйдёт на всю ширину страницы */
+  aspect-ratio: 4 / 3;        /* аккуратная высота */
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0,0,0,.15);
+  background: #eee;
+}
+.about__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* заполняем без искажений */
+  display: block;
+}
+
+/* Мобилка: один столбец, фото сверху, ниже текст */
+/* === MOBILE TUNE: центрируем медиа и текст, добавляем "воздух" === */
+@media (max-width: 900px){
+  .about__container{
+    grid-template-columns: 1fr;                 /* одна колонка */
+    justify-items: center;                      /* центр по горизонтали */
+    padding-inline: max(16px, 5vw, env(safe-area-inset-left), env(safe-area-inset-right));
+    gap: clamp(20px, 5vw, 32px);
+  }
+
+  /* картинка по центру с красивыми отступами */
+  .about__media{
+    margin-inline: auto;                        /* центр */
+    width: min(680px, 100%);                    /* ограничитель ширины */
+    aspect-ratio: 16 / 9;                       /* чуть шире для мобилки */
+    border-radius: 24px;
+    box-shadow: 0 16px 44px rgba(0,0,0,.14);
+  }
+
+  /* заголовок и текст по центру и с комфортной шириной строки */
+  .about__title,
+  .about__text{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about__text{
+    max-width: 62ch;                            /* удобная длина строки на телефоне */
+    color: #2e3a46;
+  }
+}
+
+/* экстрамалые — чуть компактнее типографика и радиус */
+@media (max-width: 420px){
+  .about__title{ font-size: clamp(24px, 8vw, 34px); }
+  .about__text{  font-size: clamp(14px, 4.2vw, 16px); line-height: 1.7; }
+  .about__media{ border-radius: 20px; }
+}
+
+/* фолбэк, если aspect-ratio не поддерживается */
+@supports not (aspect-ratio: 16/9){
+  @media (max-width: 900px){
+    .about__media{ height: clamp(220px, 42vw, 380px); }
+  }
+}
+
+
+/* Фолбэк, если вдруг нет поддержки aspect-ratio (старые браузеры) */
+@supports not (aspect-ratio: 4/3){
+  .about__media{ height: clamp(220px, 36vw, 420px); }
+}

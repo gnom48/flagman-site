@@ -1,0 +1,145 @@
+/* ===== FOOTER FULL-BLEED ===== */
+.site-footer{
+  padding: 0;
+  /* чтобы не появлялся горизонтальный скролл от full-bleed-хаков */
+  overflow-x: clip; /* можно hidden, если нужно шире поддержка */
+  background: #0a0a0a;
+  color:#fff;
+}
+
+/* стекло на всю ширину экрана, без внешних отступов */
+.footer__glass{
+  position: relative;
+
+  /* full-bleed даже если футер вложен в центрирующий контейнер */
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  /* вертикальные отступы переносим внутрь стекла */
+  padding: clamp(40px, 6vw, 70px) 0;
+
+  border-radius: 0; /* убрали скругления по краям экрана */
+  border: 1px solid rgba(255,255,255,.14);
+  border-left: 0;
+  border-right: 0;
+
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  box-shadow: 0 -10px 40px rgba(0,0,0,.28);
+  overflow: hidden;
+}
+
+/* фон под стеклом */
+.footer__glass::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("../../images/bg-dark.png") center/cover no-repeat;
+  filter: blur(3px);
+  z-index: 0;               /* слой под контентом */
+}
+
+/* контентный контейнер — как у других блоков сайта */
+.footer__container{
+  position: relative; z-index: 1; /* выше псевдофона */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(24px, 3.2vw, 34px) clamp(20px, 2.6vw, 28px);
+  color: #fff;
+}
+
+/* верхняя строка */
+.footer__top{
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* логотип | меню | соцсети */
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.footer__logo{
+  font-weight: 700;
+  font-size: clamp(22px, 2.4vw, 32px);
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -.01em;
+}
+
+/* меню */
+.footer__menu{
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__menu a{
+  font-size: clamp(16px, 2.2vw, 28px);
+  color: #fff;
+  text-decoration: none;
+  transition: opacity .2s ease, border-color .2s ease;
+  border-bottom: 1px solid transparent;
+}
+.footer__menu a:hover{ opacity:.9; border-color: rgba(255,255,255,.35); }
+
+/* соцсети */
+.footer__social{
+  display: flex;
+  gap: clamp(12px, 2vw, 20px);
+  justify-content: flex-end;
+}
+.footer__soc{
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  color:#fff;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.footer__soc:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+  background: rgba(255,255,255,.12);
+}
+
+/* нижняя строка */
+.footer__bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 3vw, 36px);
+  margin-top: clamp(16px, 2.6vw, 24px);
+  font-size: clamp(12px, 1.4vw, 18px);
+  color: rgba(255,255,255,.65);
+  flex-wrap: wrap;
+  padding-top: clamp(8px, 1.5vw, 12px);
+}
+
+.footer__policy{
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.footer__policy:hover{ border-color: rgba(255,255,255,.35); }
+
+/* адаптив */
+@media (max-width: 980px){
+  .footer__top{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .footer__social{ justify-content: center; }
+  .footer__menu{ justify-content: center; }
+}
+
+/* на всякий случай отключаем горизонтальный скролл */
+html, body{ max-width: 100%; overflow-x: hidden; }

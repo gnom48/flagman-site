@@ -1,0 +1,372 @@
+/* ============ CATALOG ============ */
+
+.catalog__glass{
+  position: relative;
+  border-radius: 36px;
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  box-shadow: 0 22px 60px rgba(0,0,0,.28);
+  overflow: hidden;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* псевдоэлемент для фона */
+.catalog__glass::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), /* затемнение */
+    url("../../images/bg-dark.png") center/cover no-repeat;
+  filter: blur(3px); /* лёгкий блюр */
+  z-index: -1; /* фон за контентом */
+}
+
+
+.catalog{
+  position: relative;
+  padding: clamp(60px, 8vw, 100px) 24px;
+  z-index: 1; /* чтобы контент был выше */
+  overflow: hidden; /* фон не вылезает */
+}
+
+
+/* контейнер */
+.catalog__container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 44px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 3vw, 32px);
+  align-items: start;
+  position: relative; /* чтобы текст всегда был поверх */
+  z-index: 2;
+
+}
+
+.cat-track{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr)); /* было 260px */
+  gap: clamp(16px, 2.4vw, 22px);
+  align-items: start;
+}
+
+
+@media (min-width: 1024px){
+  .catalog__container{
+    grid-template-columns: 0.7fr 1.3fr; /* правой колонке больше места */
+    gap: clamp(28px, 4vw, 48px);
+  }
+}
+
+/* LEFT */
+.catalog__title{
+  margin: 0 0 12px 0;
+  color:#fff;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing:.2px;
+  font-size: clamp(32px, 5.2vw, 64px);
+}
+.catalog__subtitle{
+  color: rgba(232,238,245,.78);
+  font-size: clamp(15px, 1.4vw, 18px);
+  max-width: 36ch;
+}
+
+/* GRID RIGHT */
+.catalog__grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.4vw, 22px);
+  align-items: start;
+}
+@media (max-width: 800px){
+  .catalog__grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .catalog__grid{ grid-template-columns: 1fr; }
+}
+
+/* Обёртка */
+.cat-wrap{
+  position: relative;
+  width: 100%;
+}
+
+/* Трек: на десктопе — грид; на мобиле — горизонтальный скролл с snap */
+.cat-card{
+  position: relative;
+  display:block;
+  height: clamp(230px, 28vw, 320px);
+  border-radius: 26px;
+  overflow: hidden;
+  border:1px solid rgba(255,255,255,.22);
+  background: #0a0a0a;
+  box-shadow: 0 16px 44px rgba(0,0,0,.35);
+    transform: translateY(0) translateZ(0);
+  box-shadow: 0 16px 44px rgba(0,0,0,.35);
+  transition:
+    transform .5s cubic-bezier(.22,.61,.36,1),
+    box-shadow .5s cubic-bezier(.22,.61,.36,1),
+    border-color .4s ease;
+  will-change: transform, box-shadow;
+  transform-origin: center bottom;
+}
+
+/* размытие позади */
+.cat-card::before{
+  content:"";
+  position:absolute; inset:-10%;       /* немного больше, чтобы не было краёв после blur */
+  background-image: var(--img, none);  /* <<< сюда подставим ту же картинку */
+  background-size: cover;
+  background-position: center;
+  filter: blur(18px) saturate(110%) brightness(.85);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+.cat-card img{
+  position: relative; z-index: 1;
+  width:100%; height:100%;
+  object-fit: contain;                  /* ничего не режется */
+  object-position: var(--focus-x,50%) var(--focus-y,50%);
+  filter: none;
+  transform: scale(1) translateZ(0);
+  transition:
+    transform .6s cubic-bezier(.2,.7,.2,1),
+    filter .6s cubic-bezier(.2,.7,.2,1);
+  will-change: transform, filter;
+}
+
+.cat-card__ring{ z-index: 2; }
+
+
+/* Декоративное внутреннее кольцо */
+.cat-card__ring{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+  pointer-events:none;
+}
+
+/* 1) По умолчанию центрируем кнопку */
+.catalog__cta{
+  display:flex;
+  justify-content:center;   /* центр на мобиле */
+  margin-top: clamp(8px, 2vw, 16px);
+}
+
+/* 2) На десктопе прижимаем вправо, как было задумано */
+@media (min-width: 1024px){
+  .catalog__cta{
+    grid-column: 2;
+    justify-self: end;
+    align-self: start;
+    justify-content: flex-end;  /* вправо на широких */
+    margin-top: 8px;
+  }
+}
+
+/* компактная ширина кнопки */
+.button_сatalog,
+.button_catalog{
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 48px;
+  border-radius: 15px;
+  background: #fff;
+  color: #0b0f14;
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+
+.button_сatalog:hover,
+.button_catalog:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.25);
+}
+
+/* контейнер строки: заголовок + кнопка */
+.results-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  min-height: 46px;                /* высота под кнопку */
+}
+
+/* заголовок — ужимается, без переноса, с многоточием */
+.results-title{
+  flex: 1 1 auto;                  /* даём право сжиматься */
+  min-width: 0;                    /* важно для ellipsis во flex */
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* кнопка — не переносится, фикс высота */
+.btn-filter-search{
+  flex: 0 0 auto;                  /* не сжимать кнопку */
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;             /* не переносить текст кнопки */
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+}
+.btn-filter-search:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.2);
+}
+
+/* Если на очень узких нужно поместить всё в одну строку — чуть уменьшим шрифт заголовка */
+@media (max-width: 420px){
+  .results-title{ font-size: clamp(18px, 5vw, 22px); }
+}
+
+
+@media (min-width: 1024px){
+  .catalog__container{
+    grid-template-columns: 0.7fr 1.3fr; /* как у тебя */
+  }
+  .catalog__grid{
+    grid-column: 2;                 /* сетка карточек — правая колонка */
+  }
+  .catalog__cta{
+    grid-column: 2;                 /* кнопка — тоже правая колонка */
+    justify-self: end;              /* прижать к правому краю колонки */
+    align-self: start;              /* сразу под сеткой */
+    margin-top: 8px;                /* небольшой отступ от карточек */
+  }
+}
+
+/* ховер-эффекты на десктопе */
+@media (hover: hover){
+  .cat-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 26px 66px rgba(0,0,0,.45);
+    border-color: rgba(255,255,255,.30);
+    background: rgba(255,255,255,.08);
+  }
+  .cat-card:hover img{
+    transform: scale(1.06);
+    filter: contrast(1.04) saturate(1.08) brightness(.98);
+  }
+
+  /* лёгкая реакция при mousedown */
+  .cat-card:active{
+    transform: translateY(-3px);
+    box-shadow: 0 20px 54px rgba(0,0,0,.42);
+    transition-duration: .28s;
+  }
+}
+
+/* доступность: клавиатурный фокус с теми же плавностями */
+.cat-card:focus-visible{
+  outline: 2px solid rgba(255,255,255,.55);
+  outline-offset: 3px;
+  transform: translateY(-6px);
+  box-shadow: 0 26px 66px rgba(0,0,0,.45);
+}
+
+
+/* ----- МОБИЛЬНАЯ КАРУСЕЛЬ (адаптация) ----- */
+@media (max-width: 820px){
+  .cat-track {
+    display: flex !important;            /* отключаем grid */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: clamp(10px, 3vw, 16px);
+    padding: 0 clamp(14px, 4vw, 24px);
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 24px,
+      #000 calc(100% - 24px),
+      transparent 100%
+    );
+
+    .catalog__cta{
+      justify-content: center;
+    }
+    /* опционально: кнопка поменьше/во всю ширину */
+    .catalog__cta .button,
+    .catalog__cta .button_сatalog,
+    .catalog__cta .button_catalog{
+      /* выбери один вариант: */
+      /* width: 100%; max-width: 320px; */  /* центр + ограниченная ширина */
+      /* или компактная: */
+      width: max-content;
+    }
+  }
+
+  .cat-track::-webkit-scrollbar { display: none; }
+
+  .cat-card {
+    flex: 0 0 clamp(240px, 78vw, 360px);
+    height: clamp(220px, 54vw, 340px);
+    scroll-snap-align: start;
+    border-radius: 24px;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .cat-card:last-child {
+    margin-right: clamp(16px, 4vw, 24px);
+  }
+
+  .cat-track.is-drag {
+    cursor: grabbing;
+  }
+  .cat-track {
+    cursor: grab;
+  }
+}
+
+
+/* ускоряем компоновку */
+.catalog__glass, .catalog__title, .catalog__subtitle,
+.cat-track, .cat-card, .cat-card img, .catalog__cta .button_сatalog {
+  will-change: transform, opacity, clip-path;
+}
+
+/* для 3D-tilt */
+.cat-wrap { perspective: 800px; }
+.cat-card {
+  transform-style: preserve-3d;
+}
+
+/* аккуратный ховер на десктопе */
+@media (hover: hover) and (pointer: fine){
+  .cat-card:hover .cat-card__label { filter: brightness(1.05); }
+}
+
+/* подсказываем браузеру слои */
+.catalog-cats__title, .cats-grid, .cat-card, .cat-card__media img, .cat-card__btn {
+  will-change: transform, opacity;
+}
+
+/* старт на всякий (если JS грузится с задержкой) */
+.cat-card{ opacity: 0; transform: translateY(18px) scale(.98); }
+

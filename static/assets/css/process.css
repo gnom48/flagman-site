@@ -1,0 +1,143 @@
+/* ===== PROCESS (one column, big alternating numbers) ===== */
+
+/* общий внутренний отступ секции */
+:root{
+  --process-gutter: clamp(16px, 4vw, 40px); /* поля слева/справа */
+  --extraRight: 32px;
+  --extraLeft: 42px;
+}
+
+/* контейнер: ширина + поля */
+.process__container{
+  max-width: 1300px;
+  margin-inline: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* рельса центрируется относительно padded-контейнера */
+.process__rail{
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  transform: translateX(-50%);            /* центр по горизонтали */
+  top: calc(clamp(16px,2vw,24px) + 1.6em + 12px);
+  height: calc(100% - (clamp(16px,2vw,24px) + 1.6em + 12px));
+  width: 2px;
+  background: #000;
+  opacity: .18;
+  transform-origin: top center;
+}
+
+/* если у .process уже есть свои паддинги, их можно убрать,
+   чтобы не было двойных полей */
+.process{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.process__list{
+  list-style: none;
+  margin: clamp(8px,2vw,16px) 0 0;
+  padding: 0;
+  display: grid;
+  row-gap: clamp(18px, 2.6vw, 28px);
+  position: relative;
+  z-index: 1;                              /* выше рельсы */
+}
+
+/* шаг: задаём размеры цифры/зазор */
+.process__step{
+  position: relative;
+  --numSize: clamp(150px, 28vw, 280px);    /* ЕЩЁ БОЛЬШЕ */
+  --numGap:  clamp(16px, 3vw, 32px);
+  opacity: 0;
+  transform: translateY(60px);
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .5s ease;
+}
+
+
+/* карточка — контент сбоку от цифры */
+/* карточка: клипим всё внутри + внутренний контур через inset-shadow */
+.process__card{
+  position: relative;
+  display: grid;
+  gap: 6px;
+  border: 2px solid #0a0a0a;
+  border-radius: 22px;
+  background: #fff;
+  padding: clamp(16px, 2.2vw, 24px) clamp(16px, 2.4vw, 28px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.08),
+    inset 0 0 0 1px rgba(0,0,0,.06);   /* ← внутр. контур вместо ::after */
+  overflow: hidden;                     /* ← цифра обрезается границами */
+}
+
+/* большая цифра — ниже всего */
+.process__card::before{
+  content: attr(data-step);
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  font-size: var(--numSize);
+  line-height: .78; letter-spacing: -.02em;
+  color:#000; opacity:1; white-space:nowrap;
+  pointer-events:none; user-select:none;
+  z-index: 5;                            /* ← под маской и контентом */
+}
+
+/* БЕЛАЯ МАСКА контента — закрывает цифру под текстовой зоной */
+.process__card::after{
+  content:"";
+  position:absolute;
+  background:#fff;
+  z-index: 1;                            /* ← над цифрой, под текстом */
+  pointer-events:none;
+}
+
+
+/* контент поверх всего */
+.process__card > *{ position: relative; z-index: 2; }
+
+/* нечётный шаг: цифра слева, контент справа */
+.process__step:nth-child(odd) .process__card{
+  padding-left: calc(var(--numSize) + var(--numGap) + var(--extraLeft));
+}
+.process__step:nth-child(odd) .process__card::before{ left: 0; text-align:left; }
+.process__step:nth-child(odd) .process__card::after{
+  inset: 0 0 0 calc(var(--numSize) + var(--numGap));   /* ← маска справа от цифры */
+}
+
+/* чётный шаг: цифра справа, контент слева */
+.process__step:nth-child(even) .process__card{
+  padding-right: calc(var(--numSize) + var(--numGap) + var(--extraRight));
+}
+.process__step:nth-child(even) .process__card::before{ right: 0; text-align:right; }
+.process__step:nth-child(even) .process__card::after{
+  inset: 0 calc(var(--numSize) + var(--numGap)) 0 0;   /* ← маска слева от цифры */
+}
+
+/* текст */
+.process__name{ font-size: clamp(20px, 2.8vw, 36px); font-weight:800; margin:0; }
+.process__desc{ margin:0; color:#5a5a5a; font-size:clamp(14px,1.6vw,16px); line-height:1.6; }
+
+/* соединитель (маленький отрезок) — к рельсе по центру */
+.process__step::after{
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  top: 100%; width:2px; height: clamp(12px, 2.2vw, 18px);
+  background:#000; opacity:.28;
+}
+.process__step:last-child::after{ display:none; }
+
+
+.process__step.is-in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* мобильная подстройка */
+@media (max-width: 820px){
+  .process__step{ --numSize: clamp(120px, 26vw, 200px); --numGap: clamp(12px, 4vw, 22px); }
+}

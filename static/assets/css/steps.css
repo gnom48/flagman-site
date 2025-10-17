@@ -1,0 +1,138 @@
+/* секция */
+.steps{
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* контейнер той же ширины */
+.steps__container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0; /* внутри сама сетка управляет отступами */
+}
+
+/* заголовок */
+.steps__title{
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #000;
+  margin: 0 0 clamp(24px, 3vw, 40px);
+}
+
+/* сетка шагов */
+.steps__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+}
+
+/* карточка шага с угловыми скобками */
+.step{
+  position: relative;
+  min-height: clamp(140px, 18vw, 220px);
+  border-radius: 24px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 2vw, 24px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+.step__num{
+  font-size: clamp(48px, 9vw, 96px);
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
+}
+
+.step__caption{
+  position: absolute;
+  bottom: clamp(10px, 2vw, 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(12px, 1.3vw, 18px);
+  color: rgba(0,0,0,.6);
+  white-space: nowrap;
+}
+
+/* УГЛОВЫЕ МЕТКИ — ярко скруглённые торцы */
+.corner{
+  --len: clamp(22px, 3.6vw, 36px);   /* длина усиков */
+  --th: clamp(4px, .9vw, 8px);     /* толщина линии */
+  --cap: var(--th);                  /* радиус скругления торцов */
+
+  position: absolute;
+  width: var(--len);
+  height: var(--len);
+  pointer-events: none;
+}
+
+/* два штриха: горизонтальный и вертикальный */
+.corner::before,
+.corner::after{
+  content: "";
+  position: absolute;
+  background: #000;
+  border-radius: var(--cap);         /* круглые торцы */
+}
+
+/* горизонталь — чуть короче, чтобы показать скругление */
+.corner::before{
+  height: var(--th);
+  width: calc(100% - var(--th) / 2);
+}
+
+/* вертикаль — тоже короче */
+.corner::after{
+  width: var(--th);
+  height: calc(100% - var(--th) / 2);
+}
+
+/* позиции углов */
+.corner.tl{ top: clamp(8px, 1.2vw, 14px); left: clamp(8px, 1.2vw, 14px); }
+.corner.tl::before{ top: 0; left: 0; }             /* → */
+.corner.tl::after { top: 0; left: 0; }             /* ↓ */
+
+.corner.tr{ top: clamp(8px, 1.2vw, 14px); right: clamp(8px, 1.2vw, 14px); }
+.corner.tr::before{ top: 0; right: 0; }            /* ← */
+.corner.tr::after { top: 0; right: 0; }            /* ↓ */
+
+.corner.bl{ bottom: clamp(8px, 1.2vw, 14px); left: clamp(8px, 1.2vw, 14px); }
+.corner.bl::before{ bottom: 0; left: 0; }          /* → */
+.corner.bl::after { bottom: 0; left: 0; }          /* ↑ */
+
+.corner.br{ bottom: clamp(8px, 1.2vw, 14px); right: clamp(8px, 1.2vw, 14px); }
+.corner.br::before{ bottom: 0; right: 0; }         /* ← */
+.corner.br::after { bottom: 0; right: 0; }         /* ↑ */
+
+
+/* адаптив */
+@media (max-width: 900px){
+  .steps__grid{ grid-template-columns: 1fr; }
+  .step{ min-height: clamp(120px, 32vw, 180px); }
+}
+
+/* на всякий случай — без горизонтального скролла */
+html, body{ max-width: 100%; overflow-x: hidden; }
+
+
+/* ускоряем отрисовку */
+.steps__title, .step, .step .corner { will-change: transform, opacity; }
+
+/* старт: карточки «за кадром» по сторонам */
+.steps .step {
+  opacity: 0;
+  transform: translateX(var(--fromX, 0)) translateY(12px);
+}
+.steps .step:nth-child(odd)  { --fromX: -48px; }  /* слева */
+.steps .step:nth-child(even) { --fromX:  48px; }  /* справа */
+
+/* уголки «нарисуются» */
+.steps .step .corner { opacity: 0; transform: scale(0.6); transform-origin: center; }
+
+/* небольшой анти-мигание для Safari */
+.steps { backface-visibility: hidden; -webkit-font-smoothing: antialiased; contain: paint; }
