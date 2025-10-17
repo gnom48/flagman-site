@@ -38,6 +38,7 @@
   font-size: clamp(28px, 4vw, 42px);
   font-weight:800;
   margin:0;
+  color: black;
 }
 .about__text{
   color:#374151;
@@ -76,7 +77,6 @@
 .about-card{
   flex:1;
   border-radius:18px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
   overflow:hidden;
   transition: transform .25s ease, box-shadow .25s ease;
 }
@@ -94,14 +94,7 @@
   margin:0;
   font-weight:600;
   text-align:center;
-}
-
-.about__title, .about__text, .about__media img { will-change: transform, opacity, clip-path; }
-
-/* обёртки для «кусочной» анимации заголовка */
-.reveal-chunks > span{
-  display:inline-block;
-  will-change: transform, opacity;
+  color: black;
 }
 
 
@@ -144,25 +137,94 @@
     border-radius: 12px;
   }
 }
-
-
-/* ====== Сверхмалые экраны (до 480px) ====== */
 @media (max-width: 480px) {
+  /* Родитель секции — колонкой, чтобы работал order */
   .about {
-    padding: 0px 16px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .about__title {
-    font-size: 24px;
+  /* ВНУТРИ ХЕДЕРА — свой порядок: заголовок → кнопка → текст */
+  .about__header{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
   }
 
-  .about__text {
-    font-size: 15px;
+  .about__title { 
+    order: 1; 
+    text-align: center;          /* по желанию: center/left */
+  }
+  .pill-btn{
+    order: 2;
+    align-self: center;
+    width: 100%;
+    max-width: 320px;
+  }
+  .about__text{
+    order: 3;
+    text-align: left;            /* или center */
   }
 
-  .about-card img {
+  /* Центровка и защита от переполнения (как обсуждали) */
+  .about__media {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+  .about__media img{
+    display: block !important;
+    margin: 0 auto !important;
+    float: none !important;
+    max-width: min(100%, 100vw - 32px);
+    height: auto;
+    transform: none !important;
+  }
+
+  /* Карточки по центру, не вылезают за экран */
+  .about__cards {
+    display: flex;               /* если у тебя grid — см. ниже */
+    flex-wrap: wrap;
+    justify-content: center !important;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+  }
+  .about-card {
+    padding: 8px;
+    text-align: center;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .about-card img{
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 100%;
     height: 100px;
+    transform: none !important;
   }
-  .about__cards{ gap: 6px; }
-  .about-card{ padding: 8px; }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* всем детям по умолчанию большой order */
+  .about > * { order: 10; }
+
+  /* нужный порядок: фото → карточки → заголовок+кнопка+текст */
+  .about__media  { order: 0; }  /* фото */
+  .about__cards  { order: 1; }  /* маленькие карточки */
+  .about__header { order: 2; }  /* заголовок, кнопка, текст внутри */
+
+  .about__title { order: 1; text-align: center; }
+  .pill-btn     { order: 2; align-self: center; width:100%; max-width:320px; }
+  .about__text  { order: 3; text-align: left; }
 }
+
