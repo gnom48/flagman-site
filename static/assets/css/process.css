@@ -141,3 +141,7 @@
 @media (max-width: 820px){
   .process__step{ --numSize: clamp(120px, 26vw, 200px); --numGap: clamp(12px, 4vw, 22px); }
 }
+
+/* fallback-класс видимости для IO */
+.process__step { opacity: 0; transform: translateY(60px); transition: opacity .4s ease, transform .4s ease; }
+.process__step.is-in { opacity: 1; transform: translateY(0); }
