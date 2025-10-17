@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <!-- ========== БАЗА ========== -->
+  <meta charset="utf-8">
+  <title>О компании «ФЛАГМАН» — промышленная химия, бурение/ГНБ, кварцевый песок | Уфа</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="«ФЛАГМАН» — поставщик промышленной химии и материалов с 2018 года. Бурение/ГНБ, кварцевый песок, бентонит, ксантановая камедь, реагенты. Собственная фасовка, быстрая логистика по РФ, склад в Уфе.">
+  <link rel="canonical" href="https://flagman02.ru/about">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- ========== OG / TWITTER ========== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ФЛАГМАН">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="О компании «ФЛАГМАН» — промышленная химия | Уфа">
+  <meta property="og:description" content="Работаем с 2018 года: химия для бурения и ГНБ, кварцевый песок, бентонит, реагенты. Собственная фасовка и быстрая доставка по РФ.">
+  <meta property="og:url" content="{{ url_for('about', _external=True) }}">
+  <meta property="og:image" content="{{ url_for('static', filename='/images/logoF.png', _external=True) }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="О компании ФЛАГМАН — промышленная химия и материалы, Уфа">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="О компании «ФЛАГМАН» — промышленная химия | Уфа">
+  <meta name="twitter:description" content="С 2018 года поставляем промышленную химию: бурение/ГНБ, кварцевый песок, бентонит, ксантан. Логистика по РФ.">
+  <meta name="twitter:image" content="{{ url_for('static', filename='/images/logoF.png', _external=True) }}">
+
+  <!-- ========== CSS ========== -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/process.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/catalog_main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/about_about.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/about_benefits.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/reviews_main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/steps.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/consult.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/mobile_hero.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/mobile_navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/modal.css') }}">
+
+  <!-- ========== STRUCTURED DATA (AboutPage + Breadcrumb + Organization) ========== -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AboutPage",
+    "name":"О компании «ФЛАГМАН»",
+    "url":"https://flagman02.ru/about",
+    "description":"Информация о компании «ФЛАГМАН»: опыт с 2018 года, направления поставок и сильные стороны — фасовка, логистика, контроль качества.",
+    "mainEntityOfPage":"https://flagman02.ru/about",
+    "primaryImageOfPage":{
+      "@type":"ImageObject",
+      "url":"https://flagman02.ru/static/images/logoF.png",
+      "width":1200,
+      "height":630
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"ФЛАГМАН",
+      "url":"https://flagman02.ru/",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://flagman02.ru/static/images/logoF.png",
+        "width":512,
+        "height":512
+      }
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Главная",
+        "item":"https://flagman02.ru/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"О компании",
+        "item":"https://flagman02.ru/about"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":["Organization","LocalBusiness"],
+    "name":"ФЛАГМАН",
+    "url":"https://flagman02.ru/",
+    "logo":"https://flagman02.ru/static/images/logoF.png",
+    "image":"https://flagman02.ru/static/images/logoF.png",
+    "description":"Промышленная химия и материалы: кварцевый песок, химия для бурения и ГНБ, бентонит, ксантановая камедь, галит. Уфа, доставка по РФ.",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Уфа",
+      "addressRegion":"Республика Башкортостан",
+      "streetAddress":"Уфимский р-н, с. Дмитриевка, Рабочий пер., 29",
+      "postalCode":"450512",
+      "addressCountry":"RU"
+    },
+    "telephone":"+7-962-525-16-45",
+    "openingHours":["Mo-Fr 09:00-18:00"],
+    "areaServed":"RU",
+    "sameAs":[
+      "https://t.me/your_channel",
+      "https://vk.com/your_page"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <header class="navbar-floating" id="nav" role="navigation" aria-label="Главное меню">
+  <a class="nav__brand" href="/" aria-label="На главную">Flagman</a>
+
+  <button class="nav__burger" id="navBurger"
+          aria-label="Открыть меню" aria-controls="navPanel" aria-expanded="false">
+    <span class="burger__bar"></span>
+    <span class="burger__bar"></span>
+    <span class="burger__bar"></span>
+  </button>
+
+  <nav class="nav__links">
+    <a href="/catalog">Каталог</a>
+    <a href="/about">О компании</a>
+    <a href="/contact">Контакты</a>
+    <a href="#consult" class="nav__cta">Заявка</a>
+  </nav>
+
+  <!-- Мобильная панель -->
+  <div class="nav-panel" id="navPanel" hidden>
+    <div class="nav-panel__inner">
+      <a href="/catalog" class="nav-panel__link">Каталог</a>
+      <a href="/about" class="nav-panel__link">О компании</a>
+      <a href="/contact" class="nav-panel__link">Контакты</a>
+      <a href="#consult" class="nav-panel__link nav-panel__cta">Оставить заявку</a>
+    </div>
+  </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero__container">
+      
+      <!-- ЛЕВАЯ СТЕКЛЯННАЯ ПАНЕЛЬ -->
+      <div class="glass-card glass-card--dark" data-animate>
+        <header class="navbar">
+          <div class="brand">flagman</div>
+
+          <nav class="menu" aria-label="Главное меню">
+            <a class="menu__item" href="/">Главная</a>
+            <a class="menu__item" href="/catalog">Каталог</a>
+            <a class="menu__item" href="/about">О нас</a>
+            <a class="menu__item" href="/contact">Контакты</a>
+          </nav>
+
+          <div class="social">
+            <a href="#" class="icon-btn" aria-label="Telegram" rel="noopener">
+              <img class="icon-img" src="{{ url_for('static', filename='/images/telega.svg') }}" alt="Telegram">
+            </a>
+            <a href="#" class="icon-btn" aria-label="VK" rel="noopener">
+              <img class="icon-img" src="{{ url_for('static', filename='/images/vkon.svg') }}" alt="VK">
+            </a>
+          </div>
+        </header>
+
+    
+
+        <div class="hero__left">
+          <h1 class="hero__title">Химическая продукция в Уфе</h1>
+          <p class="hero__subtitle">
+            Мы объединяем опыт, технологии и скорость, чтобы ваши проекты всегда шли по плану. Материалы. Доставка. Надёжность — всё под маркой «ФЛАГМАН».
+          </p>
+
+         <div class="stats">
+            <article class="stat">
+              <p class="stat__value">1 000+</p>
+              <p class="stat__label">тонн реагентов и химии<br/>доставлено за 2024 год</p>
+            </article>
+
+            <article class="stat">
+              <p class="stat__value">250+</p>
+              <p class="stat__label">постоянных партнёров,<br/>которые выбирают нас снова</p>
+            </article>
+
+            <article class="stat">
+              <p class="stat__value">5 лет</p>
+              <p class="stat__label">надёжных поставок<br/>и стабильного роста</p>
+            </article>
+         </div>
+
+
+            <a  class="button" id="btnPrice">
+                <span>Получить консультацию</span>
+                <span class="btn-glow" aria-hidden="true"></span>
+            </a>
+        </div>
+      </div>
+
+     <!-- ПРАВАЯ СТОРОНА: только фото атомов -->
+        <div class="glass-card glass-card--dark">
+            <img src="{{ url_for('static', filename='images/about_factory.png') }}" alt="Молекулярная структура" class="atoms" data-parallax />
+        </div>
+    </div>
+
+    <!-- мягкие цветные свечения -->
+    <div class="glow glow--tl"></div>
+    <div class="glow glow--br"></div>
+  </section>
+
+  <section class="about">
+      <div class="about__container">
+          <div class="about__media">
+          <img src="{{ url_for('static', filename='/images/about_2019.png') }}" alt="Наше производство">
+          </div>
+
+          <div class="about__body">
+          <h2 class="about__title">О нас</h2>
+          <p class="about__text">
+              Мы знаем, что сильное партнёрство, как и надёжный материал, строится на правильной реакции. 
+              С 2018 года мы поставляем и производим то, что работает без сбоев — от строительных материалов до противогололёдных реагентов. 
+              Мы не гонимся за количеством, мы создаём качество, которому доверяют. 
+              Быстрая логистика, честные сроки, проверенное сырьё и человеческое отношение — вот формула, по которой «ФЛАГМАН» работает каждый день. 
+              Между нами и клиентами — настоящая химия.
+          </p>
+          </div>
+      </div>
+  </section>
+
+  <section class="advantages catalog__glass">
+<div class="advantages__container">
+  <h2 class="advantages__title">Наши преимущества</h2>
+  <p class="advantages__subtitle">Мы предоставляем лучшее предложение на рынке</p>
+
+  <div class="advantages__grid">
+    <article class="adv-card">
+      <div class="adv-card__icon">
+        <img src="{{ url_for('static', filename='images/delivery.png') }}" alt="">
+      </div>
+      <div class="adv-card__text">Доставка по всей России</div>
+    </article>
+
+    <article class="adv-card">
+      <div class="adv-card__icon">
+        <img src="{{ url_for('static', filename='images/helping.png') }}" alt="">
+      </div>
+      <div class="adv-card__text">Помощь в отгрузке</div>
+    </article>
+
+    <article class="adv-card">
+      <div class="adv-card__icon">
+        <img src="{{ url_for('static', filename='images/sertificate.png') }}" alt="">
+      </div>
+      <div class="adv-card__text">Сертификация товаров</div>
+    </article>
+  </div>
+</div>
+  </section>
+
+  <section class="process" id="process">
+<div class="process__container">
+  <h2 class="process__title">Путь изготовления товара</h2>
+
+  <!-- вертикальная «рельса» -->
+  <span class="process__rail" aria-hidden="true"></span>
+
+  <ol class="process__list">
+    <li class="process__step" data-step="01">
+      <article class="process__card">
+        <h3 class="process__name">Подготовка сырья</h3>
+        <p class="process__desc">
+          Приём и входной контроль солей (NaCl/CaCl<sub>2</sub>/MgCl<sub>2</sub> или ацетатов),
+          при необходимости — дробление/сушка; приготовление базового рассола.
+        </p>
+      </article>
+    </li>
+
+    <li class="process__step" data-step="02">
+      <article class="process__card">
+        <h3 class="process__name">Дозирование</h3>
+        <p class="process__desc">
+          Растворение и точное дозирование компонентов, введение ингибиторов коррозии
+          и антислёживющих добавок; выдерживание температуры и pH.
+        </p>
+      </article>
+    </li>
+
+    <li class="process__step" data-step="03">
+      <article class="process__card">
+        <h3 class="process__name">Формование</h3>
+        <p class="process__desc">
+          Гранулирование / фракционирование или розлив: формирование требуемой фракции/вязкости,
+          стабилизация параметров и подготовка к упаковке.
+        </p>
+      </article>
+    </li>
+
+    <li class="process__step" data-step="04">
+      <article class="process__card">
+        <h3 class="process__name">Контроль качества</h3>
+        <p class="process__desc">
+          Проверка концентраций, точки кристаллизации, коррозионной активности и влаги; упаковка
+          (мешки/ биг-бэги/ еврокубы), маркировка и отгрузка.
+        </p>
+      </article>
+    </li>
+  </ol>
+</div>
+  </section>
+
+  <section class="reviews">
+    <div class="reviews__glass">
+      <div class="reviews__container">
+          <div class="reviews__header">
+            <h2 class="reviews__title">Отзывы наших клиентов</h2>
+
+            <a class="reviews__more" href="#all-reviews" aria-label="Смотреть ещё отзывы">
+              <span>Смотреть ещё</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="reviews__more-icon">
+                <path d="M13 5l7 7-7 7M5 12h14"/>
+              </svg>
+            </a>
+          </div>
+
+          <p class="reviews__subtitle">
+            Ваши отзывы — наши ориентиры. Благодаря вам мы каждый проект делаем ещё точнее, смелее и красивее.
+          </p>
+
+
+        <div class="reviews__grid">
+          <!-- Отзыв 1 -->
+          <article class="review">
+            <span class="review__quote" aria-hidden="true">
+              <svg><use href="#icon-quote"/></svg>
+            </span>
+
+            <header class="review__head">
+              <img class="review__avatar" src="{{ url_for('static', filename='/images/person.jpg') }}" alt="Иван Петров">
+              <div class="review__meta">
+                <div class="review__author">Иван Петров</div>
+                <time class="review__date" datetime="2025-09-12">12 сентября 2025</time>
+              </div>
+              <div class="review__rating" aria-label="Оценка 5 из 5">
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+              </div>
+            </header>
+
+            <p class="review__text">
+              Обратился в Flagman по рекомендации — и не пожалел! Всё чётко, от консультации до доставки. 
+              Помогли подобрать нужные материалы, объяснили нюансы. 
+              Качество отличное, видно, что компания ценит клиентов.
+            </p>
+
+            <footer class="review__footer">
+              <span class="review__tag">Качество</span>
+              <span class="review__tag">Надежность</span>
+            </footer>
+          </article>
+
+          <!-- Отзыв 2 -->
+          <article class="review">
+            <span class="review__quote" aria-hidden="true">
+              <svg><use href="#icon-quote"/></svg>
+            </span>
+
+            <header class="review__head">
+              <img class="review__avatar" src="{{ url_for('static', filename='/images/person.jpg') }}" alt="Анна Смирнова">
+              <div class="review__meta">
+                <div class="review__author">Анна Смирнова</div>
+                <time class="review__date" datetime="2025-08-03">3 августа 2025</time>
+              </div>
+              <div class="review__rating" aria-label="Оценка 4 из 5">
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star star--dim"><use href="#icon-star"/></svg>
+              </div>
+            </header>
+
+            <p class="review__text">
+             Обратился в Flagman по рекомендации — и не пожалел! Всё чётко, от консультации до доставки. 
+             Помогли подобрать нужные материалы, объяснили нюансы. 
+             Качество отличное, видно, что компания ценит клиентов.
+            </p>
+
+            <footer class="review__footer">
+              <span class="review__tag">Профессионализм</span>
+              <span class="review__tag">Сервис</span>
+            </footer>
+          </article>
+
+          <!-- Отзыв 3 -->
+          <article class="review">
+            <span class="review__quote" aria-hidden="true">
+              <svg><use href="#icon-quote"/></svg>
+            </span>
+
+            <header class="review__head">
+              <img class="review__avatar" src="{{ url_for('static', filename='/images/person.jpg') }}" alt="Сергей Волков">
+              <div class="review__meta">
+                <div class="review__author">Сергей Волков</div>
+                <time class="review__date" datetime="2025-07-21">21 июля 2025</time>
+              </div>
+              <div class="review__rating" aria-label="Оценка 5 из 5">
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+                <svg class="star"><use href="#icon-star"/></svg>
+              </div>
+            </header>
+
+            <p class="review__text">
+              Заказываем в Flagman уже не первый раз. Каждый раз всё на уровне — быстро, аккуратно и без сюрпризов. 
+              Особенно нравится внимательность менеджеров и честный подход к делу. Настоящие профессионалы!
+            </p>
+
+            <footer class="review__footer">
+              <span class="review__tag">Доверие</span>
+              <span class="review__tag">Опыт</span>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="steps__container">
+      <h2 class="steps__title">Три шага до оформления заказа</h2>
+
+      <div class="steps__grid">
+        <div class="step">
+          <span class="step__num">1</span>
+          <span class="step__caption">Консультация</span>
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+        </div>
+
+        <div class="step">
+          <span class="step__num">2</span>
+          <span class="step__caption">Оформление заказа</span>
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+        </div>
+
+        <div class="step">
+          <span class="step__num">3</span>
+          <span class="step__caption">Доставка заказа</span>
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+  <section class="consult"  id="consult">
+    <div class="consult__glass">
+      <div class="consult__container">
+        <h2 class="consult__title">Получите бесплатную консультацию<br>с нашим менеджером</h2>
+
+        <form class="consult__form" action="#" method="post">
+          <div class="consult__field">
+            <label for="c-name">Ваше имя</label>
+            <input id="c-name" name="name" type="text" placeholder="Иван" required>
+          </div>
+
+          <div class="consult__field">
+            <label for="c-phone">Ваш номер телефона</label>
+            <input id="c-phone" name="phone" type="tel" placeholder="+7(927)123-45-67" required>
+          </div>
+
+          <button class="consult__btn" type="submit">Заказать звонок</button>
+        </form>
+
+        <p class="consult__note">
+          *при вводе ваших данных вы соглашаетесь с условиями конфиденциальности и политикой компании
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+  <div class="footer__glass">
+    <div class="footer__container">
+      <div class="footer__top">
+        <a class="footer__logo" href="/">flagman02</a>
+
+        <nav class="footer__nav" aria-label="Нижнее меню">
+          <ul class="footer__menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog">Каталог</a></li>
+            <li><a href="/about">О нас</a></li>
+            <li><a href="/contact">Контакты</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__social">
+          <a class="footer__soc" href="#" aria-label="Мы в VK">
+            <!-- VK -->
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+              <path fill="currentColor" d="M21.6 7.7c.1-.4 0-.7-.6-.7h-2.1c-.5 0-.7.3-.9.6 0 0-1.1 2.6-2.6 4.3-.5.5-.7.6-1 .6-.1 0-.3-.1-.3-.6V7.7c0-.5-.1-.7-.6-.7H9.6c-.3 0-.5.2-.5.4 0 .5.8.6.9 1.9v2.9c0 .6-.1.7-.3.7-.7 0-2.3-2.5-3.2-5.3-.1-.4-.3-.6-.8-.6H3.6c-.5 0-.6.3-.6.6 0 .6.7 3.7 3.7 7.8 2 2.7 4.8 4.1 7.3 4.1 1.5 0 1.7-.3 1.7-.7v-1.7c0-.5.1-.6.4-.6.2 0 .6.1 1.5.9 1 .9 1.1 1.2 1.7 1.2h2.1c.5 0 .8-.3.7-.8-.2-.6-1-1.5-2.1-2.6-.6-.6-1.5-1.2-1.7-1.5-.2-.2-.2-.4 0-.7 0 0 2.9-4 3.2-5.4Z"/>
+            </svg>
+          </a>
+          <a class="footer__soc" href="#" aria-label="Мы в Telegram">
+            <!-- Telegram -->
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+              <path fill="currentColor" d="M21.5 3.5 2.9 10.6c-1 .4-.9 1.7.1 1.9l4.7 1.3 1.9 5.9c.3.9 1.4 1.1 2 .4l2.8-3 4.7 3.5c.8.6 2 .1 2.2-.9l3-15.1c.2-1-.7-1.9-1.8-1.6Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span class="footer__copy">Все права защищены</span>
+        <a class="footer__policy" href="/privacy">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </div>
+  </footer>
+
+  <div class="modal" id="mainModal" aria-hidden="true" hidden>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <button class="close" id="mClose" aria-label="Закрыть">✕</button>
+      <h3 id="mTitle">Консультация сейчас!</h3>
+      <p>Можем позвонить и подсказать актуальную стоимость и наличие. Или наберите нас:</p>
+      <div class="phone">+7(962) 525-16-45</div>
+
+      <form class="f" id="mainForm">
+        <div>
+          <label for="mName">Ваше имя</label>
+          <input id="mName" name="name" type="text" placeholder="Иван" required>
+        </div>
+        <div>
+          <label for="mPhone">Телефон</label>
+          <input id="mPhone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <button type="submit">Заказать звонок</button>
+        <small style="opacity:.7">Нажимая кнопку, вы соглашаетесь с условиями конфиденциальности.</small>
+      </form>
+    </div>
+    </div>
+
+</body>
+
+<!-- GSAP + ScrollTrigger (на будущее для секций) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  
+    <!-- JS -->
+  <script src="{{ url_for('static', filename='assets/js/hero.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/process.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/consult.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/mobile_navbar.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/modal.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='assets/js/steps.js') }}" defer></script>
+  
+</html>

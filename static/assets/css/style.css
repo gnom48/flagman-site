@@ -1,0 +1,418 @@
+/* fonts.css или в начале style.css */
+@font-face{
+  font-family: "IgraSans";
+  src:
+    url("/static/fonts/IgraSans.woff2") format("woff2"),
+    url("/static/fonts/IgraSans.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ====== Глобальные градиенты (один раз) ====== */
+:root{
+  --bg1: radial-gradient(900px 600px at 12% 8%, rgba(111,177,255,.12) 0%, transparent 60%);
+  --bg2: radial-gradient(800px 520px at 88% 85%, rgba(111,255,199,.10) 0%, transparent 60%);
+  --bg3: linear-gradient(135deg, #ffffff, #f7fafc);
+  --container-max: 1200px;                /* ширина контента */
+  --gutter-x: 24px;                        /* ЕДИНЫЕ боковые поля секций */
+  --section-y: clamp(60px, 8vw, 20px);    /* ЕДИНЫЕ вертикальные отступы секций */
+  --inner-y: clamp(28px, 4vw, 44px); 
+}
+
+/* чтобы паддинги не ломали ширины */
+*, *::before, *::after{ box-sizing: border-box; }
+
+html,body{ height:100%; scroll-behavior: auto !important; }
+body{
+  margin:0;
+  font-family: var(--font-ui);
+  color:var(--text);
+  background:#fff;                 /* БЕЗ градиента здесь */
+  position:relative;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Глобально меняем шрифт */
+:root{
+  --font-ui: "IgraSans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+             Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+}
+
+
+.contacts,
+.benefits,
+.steps,
+.consult,
+.reviews,
+.catalog { /* если есть общая секция под каталог */
+  padding: var(--section-y) var(--gutter-x);
+  overflow-x: hidden;
+}
+
+.catalog__container,
+.reviews__container,
+.contacts__container,
+.steps__container,
+.consult__container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  /* горизонтальные паддинги контейнеров = 0, чтобы всё шло по одной линии */
+  padding-inline: 0;
+  /* вертикаль можно оставить для «воздуха» */
+  position: relative;
+  z-index: 2;
+}
+
+/* Один фиксированный слой с градиентом на ВСЮ страницу */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-15% -10%;                 /* больше экрана — никаких краёв */
+  z-index:-1;
+  pointer-events:none;
+  background: var(--bg1), var(--bg2), var(--bg3);
+  transform: translateZ(0);
+  filter: saturate(110%);
+}
+
+/* Мягкий шум поверх — убирает «полосы» (banding) на больших мониторах */
+body::after{
+  content:"";
+  position:fixed;
+  inset:-15% -10%;
+  z-index:-1;
+  pointer-events:none;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0%20.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px; /* размер «зерна» */
+  background-repeat: repeat;
+  opacity:.04;
+  mix-blend-mode: overlay;
+}
+
+/* Секции и контейнеры не должны перекрывать фон */
+section{ background:transparent; }
+
+
+/* ====== Hero ====== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  overflow:visible; /* важное — даём фото выходить за края */
+  padding:48px 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.hero__container{
+  width:min(1200px, 100%);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+  align-items:stretch;
+}
+
+
+@media (min-width: 992px){
+  .hero__container{
+    grid-template-columns: 1.4fr .85fr;
+    gap:40px;
+  }
+}
+
+/* ====== Общий стеклянный блок ====== */
+.glass-card{
+  --card-radius: 32px;           /* одна переменная радиуса */
+  position: relative;
+  border-radius: var(--card-radius);
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  background: var(--glass);
+  border: 1px solid var(--glass-stroke);
+  box-shadow: var(--shadow);
+}
+
+/* ====== Вариант с фотофоном (вместо градиента) ====== */
+.glass-card--dark{
+  background: rgba(22,28,36,.45);
+  color: #eef3f8;
+  /* было: padding: 22px 22px 28px; */
+  padding: clamp(40px, 3.2vw, 10px); /* побольше и адаптивно */
+  position: relative;
+  z-index: 5;
+  isolation: isolate;        /* чтобы z-index: -1/-2 не проваливались */
+  overflow: visible;         /* контент не режем */
+}
+
+/* фото + блюр (режем только фон) */
+.glass-card--dark::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../../images/bg-dark.png") center/cover no-repeat;
+  filter: blur(2px) saturate(150%) contrast(1.3);
+  /* transform: scale(1.05);  — удалено */
+  z-index: -2;
+  pointer-events: none;
+  border-radius: inherit;
+  clip-path: inset(0 round var(--card-radius));
+}
+
+/* затемняющий слой (тоже только фон) */
+.glass-card--dark::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35));
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  clip-path: inset(0 round var(--card-radius));
+}
+
+/* цвета текста как раньше */
+.glass-card--dark .hero__title{ color:#fff; margin-top:8px; }
+.glass-card--dark .hero__subtitle{ color: rgba(232,238,245,.75); }
+
+
+/* ====== NAV внутри стеклянного блока ====== */
+.navbar{
+  display:flex; align-items:center; gap:14px;
+  padding:8px 10px; border-radius:20px;
+}
+.brand{font-weight:800; text-transform:lowercase; letter-spacing:.5px; opacity:.95}
+.menu{display:flex; gap:10px; margin-left:8px}
+.menu__item{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 13px; border-radius:999px; font-weight:600;
+  color:#e7ecf3; text-decoration:none; line-height:1;
+  transition:background .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.menu__item:hover{ background:rgba(255,255,255,.08) }
+.menu__item.is-active{
+  background:#ffffff; color:#0b0f14; box-shadow:0 6px 18px rgba(0,0,0,.18);
+}
+.social{margin-left:auto; display:flex; gap:10px}
+
+
+/* кнопки соцсетей остаются как были */
+.icon-btn{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  color:#e7ecf3;                          /* не влияет на PNG */
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease;
+}
+.icon-btn:hover{
+  background:rgba(255,255,255,.12);
+  transform: translateY(-1px);
+  box-shadow:0 10px 22px rgba(0,0,0,.25);
+}
+
+/* картинка-иконка */
+.icon-img{
+  width:18px; height:18px;
+  display:block;
+  pointer-events:none;                    /* чтобы клики шли на <a> */
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
+  /* если иконки белые — можно лёгкий подсвет на hover у родителя */
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+.icon-btn:hover .icon-img{
+  opacity:.95;                            /* лёгкий фидбек */
+}
+
+
+
+/* плавающее меню — старт почти прозрачный «ледяной» */
+.navbar-floating{
+  position: fixed;
+  top:-80px; left:50%; transform:translateX(-50%);
+  z-index:999;
+  border-radius:20px;
+  padding:10px 16px;
+  background: rgba(22,28,36,.20);       /* станет .85 при показе */
+  border:1px solid rgba(255,255,255,.08);/* станет .12 при показе */
+  backdrop-filter: blur(0px) saturate(120%); /* разгоним до 16px */
+  -webkit-backdrop-filter: blur(0px) saturate(120%);
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  opacity:0; pointer-events:none;
+  will-change: transform, opacity, backdrop-filter, box-shadow, background-color, border-color;
+}
+.navbar-floating.is-visible{ pointer-events:auto; } /* класс лишь включает интерактив */
+
+/* ====== Контент внутри левой панели ====== */
+.hero__left{max-width:720px; padding:10px 6px 4px 6px}
+.hero__title{
+  font-size: clamp(32px, 5vw, 64px);
+  line-height:1.05; margin:6px 0 12px; letter-spacing:.2px;
+}
+.hero__subtitle{
+  margin:0 0 22px; max-width:60ch; font-size: clamp(16px, 1.6vw, 18px);
+}
+
+/* ====== Стеклянные мини-карточки ====== */
+.stats{
+  display:grid; grid-template-columns: repeat(3, 1fr);
+  gap:14px; margin: 4px 0 24px;
+}
+@media (max-width: 560px){ .stats{ grid-template-columns:1fr 1fr } }
+
+.stat{
+  background: rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:20px;
+  padding:16px 14px;
+  backdrop-filter: blur(16px);
+  transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+.stat:hover{ transform: translateY(-2px); background: rgba(255,255,255,.1) }
+.stat__icon{display:inline-grid; place-items:center; width:26px; height:26px; opacity:.9; margin-bottom:6px}
+.stat__icon svg{fill:#ffffff}
+.stat__value{margin:0; font-weight:800; font-size: clamp(22px, 3vw, 36px); color:#fff; letter-spacing:.5px}
+.stat__label{margin:6px 0 0; font-size:12.5px; color:rgba(232,238,245,.75)}
+
+/* ====== CTA (Lenis/GSAP friendly, full-width, premium) ====== */
+.button{
+  --x: 50%;                /* позиция спотлайта по X */
+  --y: 50%;                /* позиция спотлайта по Y */
+  --ring: 0 0 0 0 rgba(111,177,255,.0);
+  --shadow-elev: 0 12px 30px rgba(0,0,0,.18);
+
+  position: relative;
+  display:block;
+  width:100%;
+  padding:18px 2px;
+  border-radius:28px;
+  font-weight:800;
+  text-decoration:none;
+  text-align:center;
+  color:#0b0f14;
+  overflow:hidden;
+  will-change: transform, box-shadow, background-position;
+
+  /* стеклянный фон + динамический spotlight */
+  background:white;
+  box-shadow: var(--shadow-elev), inset 0 0 0 1px rgba(0,0,0,.05);
+  transition: box-shadow .25s ease, filter .25s ease;
+  cursor: pointer;               /* курсор "кнопки", не I-beam */
+  user-select: none;             /* запрет выделения текста */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-tap-highlight-color: transparent; /* без синего хайлайта на мобилках */
+  touch-action: manipulation;    /* быстрее клики на тач-устройствах */
+}
+
+/* чтобы клики шли по всей кнопке и ничего внутри не выделялось */
+.button *{
+  pointer-events: none;          /* дети не перехватывают событие */
+}
+
+/* доступность: оставляем видимый фокус с клавиатуры */
+.button:focus-visible{
+  outline: 2px solid rgba(11,15,20,.5);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(111,177,255,.15), var(--shadow-elev);
+}
+
+
+.button span{ position:relative; z-index:2; }
+
+.button::after{
+  /* неоновая кайма (мягкая) */
+  content:"";
+  position:absolute; inset:0; border-radius:inherit; z-index:1;
+  box-shadow: var(--ring);
+  pointer-events:none;
+  transition: box-shadow .25s ease;
+}
+
+.btn-glow{
+  /* подсветка под текстом, двигается за курсором */
+  position:absolute; inset:-40%;
+  background: radial-gradient(closest-side at var(--x) var(--y),
+              rgba(111,177,255,.22), rgba(111,177,255,0) 70%);
+  filter: blur(22px);
+  opacity:.0;
+  z-index:1;
+  pointer-events:none;
+  transition: opacity .25s ease;
+}
+
+/* hover-состояние – мягкий подъём и свечение */
+.button:hover{
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.22),
+    inset 0 0 0 1px rgba(0,0,0,.06);
+}
+.button:hover::after{ --ring: 0 0 0 6px rgba(111,177,255,.20), 0 0 70px 18px rgba(111,177,255,.25); }
+.button:hover .btn-glow{ opacity:.9; }
+
+/* ripple кружок (добавляет скрипт) */
+.btn-ripple{
+  position:absolute;
+  width:14px; height:14px; border-radius:50%;
+  background: radial-gradient(circle at center, rgba(111,177,255,.45), rgba(111,177,255,0) 70%);
+  transform: translate(-50%,-50%) scale(0);
+  opacity:.65; pointer-events:none; z-index:1;
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .button{ transition:none !important }
+}
+
+/* 2) Настраиваем порядок слоёв справа */
+.right-visual{ position: relative; }
+.atoms{
+  position: absolute;
+  z-index: 3;           /* выше правой карточки, но ниже левой (z=5) */
+  pointer-events: none; /* чтобы не мешала ховерам меню/кнопок */
+  top:-70px; right:-110px;
+  width:120%; height:auto;
+  border-radius:32px;
+}
+
+.atoms{
+  position:absolute;
+  top:-70px; right:-110px; /* выходит за края блока и секции */
+  width:120%; max-width:none; height:auto;
+  border-radius:32px;
+  z-index:3;
+}
+.atoms::after{content:""} /* резерв на случай дальнейших эффектов */
+
+/* Мобайл: картинка становится обычной */
+@media (max-width: 992px){
+  .right-visual{ min-height:unset }
+  .right-card{ min-height:360px }
+  .atoms{
+    position:relative; top:auto; right:auto; width:100%; margin-top:-40px;
+  }
+}
+
+/* ====== Декоративные свечения ====== */
+.glow{
+  position:absolute; filter: blur(90px); opacity:.25; pointer-events:none; z-index:0;
+}
+.glow--tl{ width:420px; height:420px; top:-120px; left:-120px;
+  background: radial-gradient(closest-side, rgba(111,177,255,.35) 0%, transparent 70%) }
+.glow--br{ width:520px; height:520px; right:-160px; bottom:-160px;
+  background: radial-gradient(closest-side, rgba(111,255,199,.30) 0%, transparent 70%) }
+
+/* ====== Анимации появления ====== */
+[data-animate]{opacity:0; transform: translateY(18px); will-change:transform,opacity}
+.reveal{opacity:1 !important; transform:none !important; transition: opacity .7s ease, transform .7s ease}
+
+/* ====== Reduce motion ====== */
+@media (prefers-reduced-motion: reduce){
+  .stat, .button, [data-animate], .atoms{ transition:none !important; transform:none !important; }
+}
+

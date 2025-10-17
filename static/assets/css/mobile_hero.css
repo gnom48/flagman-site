@@ -1,0 +1,216 @@
+/* --- Мобильные улучшения --- */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* базовые отступы секции на телефоне + safe-area */
+@media (max-width: 768px){
+  /* блок на 100% высоты вьюпорта */
+  .hero{
+    /* паддинги оставляем как у тебя */
+    padding: 28px 16px;
+    padding-top: calc(28px + env(safe-area-inset-top));
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+
+    /* full-screen высота с фолбэками */
+    min-height: 100vh;   /* фолбэк для старых */
+    min-height: 100svh;  /* корректно учитывает UI на мобилках */
+    min-height: calc(100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+
+    /* центрируем контент по вертикали и горизонтали */
+    display: grid;
+    place-items: center;
+
+    box-sizing: border-box;
+  }
+
+  /* контейнер — ширина и сетка как у тебя + центр по ширине */
+  /* контейнер — 85% высоты экрана и вертикальное центрирование содержимого */
+.hero__container{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: min(1200px, 100%);
+  margin-inline: auto;
+
+  /* высота */
+  min-height: 85vh;     /* фолбэк */
+  min-height: 85svh;    /* корректно на мобилках */
+
+  /* центрирование контента по вертикали (и горизонтали для грид-треков) */
+  place-content: center;
+
+  /* опционально: если нужно центрировать сами элементы по ширине */
+  /* justify-items: center; */
+}
+
+
+  .hero__container > *{ order: 2; }     /* по умолчанию — после */
+  .hero__container > :nth-child(2){     /* второй элемент (с картинкой) — первым */
+    order: 1;
+    display: none !important;
+  }
+
+  /* стеклянные карточки — мягче, компактнее */
+  .glass-card{ border-radius: 24px; }
+  .glass-card--dark{
+    padding: 16px 16px 20px;
+    backdrop-filter: blur(12px) saturate(115%);
+    -webkit-backdrop-filter: blur(12px) saturate(115%);
+  }
+  .glass-card--dark::before{
+    /* меньше нагрузка от блюра на телефоне */
+    filter: blur(.5px) saturate(110%) contrast(1.02);
+    transform: scale(1.03);
+  }
+
+  /* заголовки/тексты */
+  .hero__title{ font-size: clamp(24px, 7vw, 36px); margin: 4px 0 10px; }
+  .hero__subtitle{ font-size: clamp(14px, 3.8vw, 16px); margin: 0 0 16px; max-width: 100%; }
+
+  /* навбар */
+  .navbar{ gap: 10px; padding: 6px 8px; }
+  .brand{ font-size: 16px; }
+  .menu{ gap: 6px; margin-left: 6px; flex-wrap: wrap; }
+  .menu__item{ padding: 8px 12px; font-size: 14px; }
+  .social{ gap: 8px; }
+  .icon-btn{ width: 32px; height: 32px; }
+  .icon-img{ width: 16px; height: 16px; }
+
+  /* кнопка CTA — компактнее */
+  .button{ padding: 14px 0; border-radius: 22px; }
+  .btn-glow{ filter: blur(18px); }
+}
+
+/* ещё компактнее на очень маленьких экранах */
+@media (max-width: 480px){
+  .hero{ padding: 22px 14px; }
+  .menu{ gap: 4px; }
+  .menu__item{ padding: 8px 10px; font-size: 13px; }
+  .stats{ grid-template-columns: 1fr; }
+  .button{ padding: 12px 0; border-radius: 20px; }
+  .navbar-floating{ display: none; } /* чтобы не закрывало контент на узких экранах */
+}
+
+/* картинка атомов: на мобильном — внутри потока, без «вылезаний» */
+@media (max-width: 992px){
+  .right-visual{ min-height: unset; }
+  .atoms{
+    position: relative;
+    top: 0; right: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-top: -12px;     /* лёгкое наложение, без горизонтального скролла */
+    border-radius: 20px;
+  }
+}
+
+  /* ===== МОБИЛЬНО: 3 аккуратные колонки ===== */
+@media (max-width: 640px){
+  .stats{
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 колонки */
+    gap: 8px 10px;                                   /* плотнее */
+  }
+  .stat{
+    padding: 12px 10px;
+    border-radius: 16px;
+  }
+  .stat__value{
+    font-size: clamp(16px, 5.2vw, 20px); /* компактнее на мобилке */
+  }
+  .stat__label{
+    font-size: 11px;
+  }
+}
+
+/* сверхмалые экраны — чуть плотнее */
+@media (max-width: 360px){
+  .stats{ gap: 6px 8px; }
+  .stat{ padding: 10px 8px; }
+  .stat__value{ font-size: clamp(15px, 5.6vw, 18px); }
+}
+
+/* на случай, если где-то остался snap/smooth — отключаем на мобиле */
+@media (max-width: 768px){
+  html{ scroll-behavior: auto !important; }
+  section{ scroll-snap-align: unset !important; scroll-snap-stop: normal !important; }
+}
+
+/* ===== ПЛАНШЕТ (769–1199px) ===== */
+@media (min-width: 769px) and (max-width: 1199px){
+
+  /* секция-герой: по центру, без лишней высоты */
+  .hero{
+    padding: 32px 24px;
+    min-height: 85svh;                 /* не тянем на весь экран, чтобы не было «дыры» */
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+  }
+
+  /* одна колонка, аккуратные отступы */
+  .hero__container{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: min(1100px, 100%);
+    margin-inline: auto;
+  }
+
+  /* ПОЛНОСТЬЮ ПРЯЧЕМ большие иллюстрации/анимации */
+  .hero__container > :nth-child(2),
+  .right-visual,
+  .atoms{
+    display: none !important;          /* ключевое: ничего «снизу» не вылезает */
+  }
+
+  /* карточки: немного мягче, без тяжёлых эффектов */
+  .glass-card{ border-radius: 22px; }
+  .glass-card--dark{
+    padding: 18px 18px 22px;
+    backdrop-filter: blur(10px) saturate(112%);
+    -webkit-backdrop-filter: blur(10px) saturate(112%);
+  }
+  .glass-card--dark::before{
+    filter: blur(.6px) saturate(108%) contrast(1.02);
+    transform: scale(1.02);
+  }
+
+  /* типографика: чуть крупнее, чем на телефоне */
+  .hero__title{ font-size: clamp(28px, 4.6vw, 40px); margin: 6px 0 12px; }
+  .hero__subtitle{ font-size: clamp(15px, 2.6vw, 18px); margin: 0 0 18px; }
+
+  /* меню и шапка — компактно */
+  .navbar{ gap: 12px; padding: 8px 12px; }
+  .brand{ font-size: 18px; }
+  .menu{ gap: 8px; margin-left: 8px; flex-wrap: wrap; }
+  .menu__item{ padding: 10px 14px; font-size: 15px; }
+  .social{ gap: 10px; }
+  .icon-btn{ width: 36px; height: 36px; }
+  .icon-img{ width: 18px; height: 18px; }
+
+  /* CTA-кнопка: удобная ширина */
+  .button{
+    padding: 14px 18px;
+    border-radius: 22px;
+    min-width: clamp(200px, 40vw, 360px);
+    justify-self: center;              /* центрируем в гриде */
+  }
+
+  /* статистика — 3 аккуратные колонки */
+  .stats{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 14px;
+  }
+  .stat{
+    padding: 14px 12px;
+    border-radius: 16px;
+  }
+  .stat__value{ font-size: clamp(18px, 3.6vw, 22px); }
+  .stat__label{ font-size: 12px; }
+
+  /* на планшете отключаем возможные "прилипалки" скролла */
+  html{ scroll-behavior: auto !important; }
+  section{ scroll-snap-align: unset !important; scroll-snap-stop: normal !important; }
+}
+
+/* Если у тебя выше есть правило @media (max-width: 992px) для .atoms/.right-visual —
+   это перекроется за счёт !important, но лучше просто убрать то правило или сделать его слабее. */

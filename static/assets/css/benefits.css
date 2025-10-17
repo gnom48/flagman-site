@@ -1,0 +1,87 @@
+/* ===== Benefits ===== */
+.benefits{ padding: clamp(48px,6vw,96px) 24px; 
+overflow-x: hidden;
+ max-width: 1300px; margin: 0 auto;
+}
+.benefits__container{
+  max-width: 1300px; margin: 0 auto;
+  display: grid; gap: clamp(28px,4vw,56px);
+  grid-template-columns: 1fr; align-items: start;
+}
+@media (min-width: 1024px){
+  .benefits__container{ grid-template-columns: 1.05fr 0.95fr; }
+}
+
+.benefits__title{
+  margin:0 0 16px; line-height:1.05; letter-spacing:.2px;
+  font-weight:900; font-size: clamp(32px,5vw,64px);
+}
+
+.benefits__media{
+  overflow: hidden;      /* обрезает выходящее */
+  border-radius: 28px;   /* можно перенести радиус сюда */
+}
+
+.benefits__media img{
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%; /* или просто center */
+  max-height: 640px;
+  transform: translateZ(0); 
+}
+
+
+/* Accordion */
+.accordion{ border-radius:18px; }
+.acc-item + .acc-item{ margin-top: 8px; }
+
+.acc-head{
+  width:100%; display:flex; align-items:center; gap:14px;
+  padding: 18px 0; border:0; background:transparent; cursor:pointer;
+  border-bottom:1px solid rgba(15,23,42,.12);
+}
+.acc-title{
+  font-size: clamp(20px, 2.6vw, 34px);
+  font-weight:800; letter-spacing:.3px; text-align:left; color:#0b0f14;
+}
+.acc-sign{
+  position:relative; width:28px; height:28px; flex:0 0 28px;
+  border-radius:50%;
+  background: #0b0f1410; /* лёгкий диск под знаком */
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), background .25s ease;
+}
+.acc-sign::before,
+.acc-sign::after{
+  content:""; position:absolute; left:50%; top:50%;
+  width:70%; height:2px; background:#0b0f14; border-radius:2px;
+  transform:translate(-50%,-50%);
+}
+.acc-sign::after{ transform:translate(-50%,-50%) rotate(90deg); } /* вертикальная полоса — «+» */
+
+.acc-head[aria-expanded="true"] .acc-sign{
+  transform: rotate(45deg);               /* «+» становится «×» */
+  background:#0b0f141a;
+}
+
+.acc-body{
+  overflow: hidden;
+  height: 0; opacity: 0;
+  will-change: height, opacity;
+}
+.acc-body p{ margin:12px 0 8px; color:#374151; line-height:1.6; }
+.acc-body ul{ margin:0; padding-left: 18px; color:#374151; }
+.acc-body li{ margin: 6px 0; }
+
+/* маленькая подсветка при ховере */
+.acc-head:hover .acc-sign{ background:#0b0f1415; }
+
+/* Пин-сцена: убираем любые собственные transitions, чтобы не конфликтовали с GSAP */
+.benefits, .benefits * { transition: none !important; }
+
+/* Пин-контейнеру — анти-мигающий набор для Safari/iOS */
+.benefits {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  contain: paint;               /* не выходим за границы компоновки */
+}

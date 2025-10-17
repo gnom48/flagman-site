@@ -1,0 +1,85 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bat
+pip-virtualenv-helper.exe
+.virtualenv
+.virtualenvs
+virtualenv*
+
+# Logs and databases
+logs
+*.log
+*.sqlite3
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coveragerc
+.noseids
+.cache
+nosetests.xml
+coverage.xml
+.tox/
+.hypothesis/
+.pytest_cache/
+pytest_debug.log
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.egg-info/
+.installed.cfg
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg
+*.egg-info
+*.whl
+*.dist-info
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / build report artifacts
+tmp/
+temp/
+
+# Editor directories and files
+.idea/
+.ropeproject/
+.project
+.pydevproject
+.svn/
+.cvs/
+.git/
+.dsvn/
+.hg/
+.bzr/
+.tags
+.tags.backup
+.settings/
+.metadata/
+.nbproject/
+.DS_Store
+.appspot.com/
+~*
+*~
+*.swp
+*.bak
