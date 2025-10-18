@@ -6,7 +6,6 @@
   border:1px solid rgba(255,255,255,.14);
   backdrop-filter: blur(22px) saturate(120%);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
-  box-shadow: 0 22px 60px rgba(0,0,0,.28);
   overflow: hidden;
   max-width: 1300px;
   margin: 0 auto;
@@ -52,6 +51,7 @@
   grid-template-columns: repeat(3, minmax(200px, 1fr)); /* было 260px */
   gap: clamp(16px, 2.4vw, 22px);
   align-items: start;
+  
 }
 
 
@@ -296,6 +296,7 @@
     overflow-y: hidden;
     gap: clamp(10px, 3vw, 16px);
     padding: 0 clamp(14px, 4vw, 24px);
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -327,9 +328,10 @@
   .cat-card {
     flex: 0 0 clamp(240px, 78vw, 360px);
     height: clamp(220px, 54vw, 340px);
-    scroll-snap-align: start;
     border-radius: 24px;
     transition: transform .3s ease, box-shadow .3s ease;
+    scroll-snap-align: center;        /* карта прилипает по центру */
+    scroll-snap-stop: always; 
   }
 
   .cat-card:last-child {
@@ -369,4 +371,3 @@
 
 /* старт на всякий (если JS грузится с задержкой) */
 .cat-card{ opacity: 0; transform: translateY(18px) scale(.98); }
-

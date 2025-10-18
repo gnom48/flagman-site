@@ -326,7 +326,6 @@
 /* === МОБИЛЬНАЯ КАРУСЕЛЬ (только скролл) === */
 @media (max-width: 768px){
   .reviews__grid{
-    /* флекс-карусель */
     display: flex;
     flex-wrap: nowrap;
     gap: 12px;
@@ -334,12 +333,16 @@
 
     overflow-x: auto;
     overflow-y: hidden;
+
+    /* Включаем нативный snap */
     scroll-snap-type: x mandatory;
-    scroll-padding: 16px;                 /* учитываем боковые паддинги */
-    -webkit-overflow-scrolling: touch;    /* инерция iOS */
+    scroll-padding: 16px;                /* учитываем боковые паддинги */
+    -webkit-overflow-scrolling: touch;   /* инерция iOS */
     scroll-behavior: smooth;
-    overscroll-behavior-x: contain;       /* не «проламываем» страницу */
-    touch-action: pan-y;                  /* вертикальный скролл приоритетнее */
+    overscroll-behavior-x: contain;
+
+    /* ВАЖНО: разрешаем горизонтальные жесты внутри карусели */
+    touch-action: pan-x;                 /* было pan-y — из-за этого не листалось */
 
     /* мягкие края, подсказка, что можно листать */
     mask-image: linear-gradient(90deg,
@@ -349,32 +352,34 @@
       transparent 100%
     );
 
-    /* прячем системные полосы прокрутки */
-    -ms-overflow-style: none;             /* IE/Edge старый */
-    scrollbar-width: none;                /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .reviews__grid::-webkit-scrollbar{ display: none; }
 
-  /* карточка как слайд */
   .review{
-    flex: 0 0 clamp(78%, 86vw, 92%);     /* ширина слайда */
-    scroll-snap-align: center;           /* центрируем после прокрутки */
-    scroll-snap-stop: always;            /* надёжная остановка */
+    flex: 0 0 clamp(78%, 86vw, 92%);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
     margin: 12px 0;
-
-    /* чуть компактнее на мобилке */
     padding: 20px;
     border-radius: 22px;
+
+    /* страховки от переполнения */
+    min-width: 0;
+    max-width: 100%;
+    transform: none; /* чтобы трансформы не ломали snap */
   }
+
+  /* на всякий пожарный — родителю, если он тоже flex */
+  .reviews__wrap, .reviews__container { min-width: 0; max-width: 100%; }
   .review__avatar{ width: 48px; height: 48px; }
   .review__text{ font-size: 15px; line-height: 1.6; }
-
-  /* приглушаем «блик», чтобы не мешал восприятию при свайпе */
   .review::after{ opacity: .35; filter: blur(16px); }
 }
+
 
 /* уважение к prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce){
   .reviews__grid{ scroll-behavior: auto; }
 }
-
