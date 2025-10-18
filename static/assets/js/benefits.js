@@ -1,4 +1,3 @@
-// ============ КЛИК-АККОРДЕОН (как у тебя, без изменений по сути) ============
 (function(){
   const items = document.querySelectorAll('#benefit-acc .acc-item');
   if(!items.length) return;
@@ -57,13 +56,30 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
+  const reduce   = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch  = matchMedia('(pointer: coarse)').matches;
+  const isNarrow = window.innerWidth < 992;
+  const isMobile = reduce || isTouch || isNarrow;
+
+  // ===== МОБИЛЬНЫЙ/REDUCED: БЕЗ АНИМАЦИЙ =====
+  if (isMobile) {
+    const show = sel =>
+      document.querySelectorAll(sel).forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+
+    show('.benefits__title');
+    show('#benefit-acc .acc-head');
+    show('.benefits__media img');
+    return; // выходим — никаких gsap
+  }
+
+  // ===== ДЕСКТОП: анимации как раньше =====
   if (!window.gsap || !window.ScrollTrigger) return;
+  const gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;
   gsap.registerPlugin(ScrollTrigger);
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isTouch = matchMedia('(pointer: coarse)').matches;
-
-  // стартовые состояния — ничего резкого
   gsap.set('.benefits__title', {opacity: 0, y: 16});
   gsap.set('#benefit-acc .acc-head', {opacity: 0, y: 12});
   gsap.set('.benefits__media img', {opacity: 0, y: 16});
@@ -71,34 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1) мягкое появление секции (один раз)
   const tl = gsap.timeline({
     defaults: {duration: 0.5, ease: 'power2.out'},
-    scrollTrigger: {
-      trigger: '.benefits',
-      start: 'top 75%',
-      once: true
-    }
+    scrollTrigger: { trigger: '.benefits', start: 'top 75%', once: true }
   });
 
   tl.to('.benefits__title', {opacity: 1, y: 0}, 0)
     .to('.benefits__media img', {opacity: 1, y: 0}, '<+0.05')
-    .to('#benefit-acc .acc-head', {
-      opacity: 1, y: 0,
-      stagger: 0.1
-    }, '<+0.05');
+    .to('#benefit-acc .acc-head', {opacity: 1, y: 0, stagger: 0.1}, '<+0.05');
 
-  // 2) лёгкий параллакс изображения на скролле (только десктоп и не reduce)
-  if (!reduce && !isTouch) {
-    gsap.to('.benefits__media img', {
-      y: -10,           // совсем небольшой диапазон
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.benefits',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-  }
+  // 2) параллакс изображения (только десктоп)
+  gsap.to('.benefits__media img', {
+    y: -10, ease: 'none',
+    scrollTrigger: { trigger: '.benefits', start: 'top bottom', end: 'bottom top', scrub: true }
+  });
 
-  // сглаживание для редких микролагов
   gsap.ticker.lagSmoothing(500, 30);
 });
