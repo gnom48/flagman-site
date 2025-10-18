@@ -328,8 +328,13 @@
   color:black;
 }
 
+
 /* мобильная оптимизация */
 @media (max-width: 600px){
+  .p-cta{
+    box-shadow: none !important;
+  }
+
   .rel{ padding-inline:16px; }
   .rel-grid{
     gap:12px;
@@ -340,6 +345,99 @@
   .product{ flex-basis: clamp(180px, 60vw, 240px); padding:12px; }
   .product__title{ font-size:15px; }
   .product__cta{ width:34px; height:34px; }
+
+   .p-card{
+    grid-template-columns: 1fr;    
+    justify-items: center;         
+    align-items: start;
+    text-align: center;            
+    gap: 14px;
+
+
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* всем прямым детям разрешаем сжиматься и не вылазить */
+  .p-card > *{
+    max-width: 100%;
+    min-width: 0;                 
+  }
+
+  /* медиа-блок и картинка адаптивно */
+  .p-card__media,
+  .p-card__media *{
+    max-width: 100%;
+    min-width: 0;
+  }
+  .p-card__media img{
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: min(100%, 100vw - 2rem); 
+    margin: 0 auto;
+  }
+
+  /* кнопки по центру и не шире экрана */
+  .p-card .btn,
+  .p-card .pill-btn{
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  /* если внутри есть списки/таблицы — тоже не даём вылазить */
+  .p-card ul, .p-card ol, .p-card table{
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+ .p-card .specs li{
+    grid-template-columns: 1fr auto; /* оставляем ту же схему */
+  }
+
+ /* список не шире контейнера и по левому краю */
+.p-card .specs{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  list-style:none;
+  text-align:left;
+  align-self:stretch;
+  justify-self:stretch;
+}
+
+/* строка спецификации — две растянутые колонки */
+.p-card .specs li{
+  display:grid;
+  grid-template-columns: 1fr auto; /* левая колонка тянется, правая по контенту */
+  gap: 8px 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* последний без линии */
+.p-card .specs li:last-child{ border-bottom:none; }
+
+/* ключ — слева, значение — справа; разрешаем сжатие и переносы */
+.p-card .specs .k{
+  justify-self: start;
+  text-align: left;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-weight: 500;
+  opacity: .9;
+}
+.p-card .specs li > span:not(.k){
+  justify-self: end;          /* прижимаем к правому краю строки */
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 }
 
 /* уважение к настройкам «уменьшить анимацию» */
@@ -537,7 +635,7 @@ body.modal-open { overflow: hidden; }
   /* если сверху были float-элементы — отцепим их */
   clear: both;
   z-index: 1;                  /* поверх фоновых декоративных слоёв */
-  margin-top: 40px;
+  margin-top: 50px;
   margin-bottom: 0px;
 
   border-bottom: 1px solid rgba(0,0,0,.12);
